@@ -43,7 +43,7 @@ async def _(client, message):
 {ngentod} : <code>{client.me.mention}</code>
 {kontol} : <code>{bot.me.mention}</code></blockquote>
 
-<blockquote><b>USERBOT 10K/BULAN BY @NOEZUBOTPREM_ubot</b></blockquote>"""
+<blockquote><b>USERBOT BY @AldyZzXy</b></blockquote>"""
         await message.reply(_ping)
 
 @PY.INDRI("1ping")
@@ -67,11 +67,11 @@ async def _(client, message):
     babi = client.me.is_premium
     if babi:
         _ping = f"""
-<blockquote>{pong}pong : {str(delta_ping_formatted).replace('.', ',')} ms
+<blockquote>{pong}ping : {str(delta_ping_formatted).replace('.', ',')} ms
 {tion}owner : {client.me.mention}
 {yubot}ubot : {bot.me.mention}</blockquote>
 
-<blockquote><b>USERBOT 10K/BULAN BY @NOEZUBOTPREM_ubot</b></blockquote>
+<blockquote><b>USERBOT BY @AldyZzXy</b></blockquote>
     """
         await message.reply(_ping)
     else:
