@@ -1,1 +1,0 @@
-__MODULE__ = "ᴄᴀᴛᴜʀ"__HELP__ = """<b>✮ʙᴀɴᴛᴜᴀɴ ᴜɴᴛᴜᴋ ᴄᴀᴛᴜʀ ✮<b><blockquote><b>perintah :<code>{0}catur</code>untuk memunculkan game catur</b></blockquote>"""
