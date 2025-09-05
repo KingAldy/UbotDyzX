@@ -13,7 +13,7 @@ from pyrogram.types import Message
 from pytgcalls import PyTgCalls
 from pytgcalls import filters as fl
 from pyromod import listen
-from PyroUbot.config import *
+from AldyUbot.config import *
 from aiohttp import ClientSession
 
 class ConnectionHandler(logging.Handler):
@@ -152,6 +152,6 @@ bot = Bot(
 
 ubot = Ubot(name="ubot")
 
-from PyroUbot.core.database import *
-from PyroUbot.core.function import *
-from PyroUbot.core.helpers import *
+from AldyUbot.core.database import *
+from AldyUbot.core.function import *
+from AldyUbot.core.helpers import *
