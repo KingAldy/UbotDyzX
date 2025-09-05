@@ -2,7 +2,7 @@ import signal
 import tornado.ioloop
 import tornado.platform.asyncio
 from pyrogram import Client
-from PyroUbot import *
+from AldyUbot import *
 
 async def shutdown(signal, loop):
     print(f"Received exit signal {signal.name}...")
