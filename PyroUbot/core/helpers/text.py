@@ -37,7 +37,7 @@ class MSG:
 <b>🔖 ᴛᴏᴛᴀʟ ʜᴀʀɢᴀ: ʀᴘ {total}.000</b>
 <b>🗓️ ᴛᴏᴛᴀʟ ʙᴜʟᴀɴ: {bulan}</b> 
 
-OWNER BOT : <a href=tg://openmessage?user_id={OWNER_ID}>@xwynoez1</a> 
+OWNER BOT : <a href=tg://openmessage?user_id={OWNER_ID}>@AldyZzXy</a> 
 
 <b>🛍 ᴋʟɪᴋ ᴛᴏᴍʙᴏʟ ᴋᴏɴꜰɪʀᴍᴀsɪ ᴜɴᴛᴜᴋ ᴋɪʀɪᴍ ʙᴜᴋᴛɪ ᴘᴇᴍʙᴀʏᴀʀᴀɴ ᴀɴᴅᴀ</b></blockquote>
 """
@@ -50,5 +50,5 @@ OWNER BOT : <a href=tg://openmessage?user_id={OWNER_ID}>@xwynoez1</a>
 """
 
     def POLICY():
-        return """ <blockquote><b>ᴊɪᴋᴀ ᴀᴅᴀ ᴋᴇɴᴅᴀʟᴀ sɪʟᴀʜᴋᴀɴ ʜᴜʙᴜɴɢɪ  <a href=tg://openmessage?user_id={OWNER_ID}>@xwynoez1</a></b></blockquote>
+        return """ <blockquote><b>ᴊɪᴋᴀ ᴀᴅᴀ ᴋᴇɴᴅᴀʟᴀ sɪʟᴀʜᴋᴀɴ ʜᴜʙᴜɴɢɪ  <a href=tg://openmessage?user_id={OWNER_ID}>@AldyZzXy</a></b></blockquote>
 """
