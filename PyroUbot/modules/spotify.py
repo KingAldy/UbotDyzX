@@ -1,7 +1,6 @@
 from pyrogram import Client, filters
-import requests
-import os
-from PyroUbot import *
+from pyrogram.types import Message
+import asyncio
 
 __MODULE__ = "sᴘᴏᴛɪғʏ"
 __HELP__ = """
@@ -9,74 +8,47 @@ __HELP__ = """
 <blockquote><b>
 ⎆ Perintah :
 ᚗ <code>{0}spotify</code> judul lagu
-⊶ Mendownload Music Yang Di Inginkan.</b></blockquote>
+⊶ Mendownload Music</b></blockquote>
 """
 
-@PY.UBOT("spotify")
-async def spotify_search(client, message):
+BOT_TARGET = "Song_vkm_bot"
+
+@Client.on_message(filters.command("spotify", prefixes=".") & filters.me)
+async def spotify_search(client: Client, message: Message):
     query = " ".join(message.command[1:])
     if not query:
-        await message.reply_text("Gunakan format: /spotify <judul lagu>")
-        return
-    
-    proses_msg = await message.reply_text("🔎 Mencari lagu...")
-    search_url = f"https://api.botcahx.eu.org/api/search/spotify?query={query}&apikey=@moire_mor"
-    search_response = requests.get(search_url).json()
-    
-    if not search_response["status"] or not search_response["result"]["status"]:
-        await proses_msg.edit_text("Gagal mencari lagu.")
-        return
-    
-    tracks = search_response["result"]["data"]
-    if not tracks:
-        await proses_msg.edit_text("Tidak ditemukan hasil untuk pencarian tersebut.")
-        return
-    
-    track_url = tracks[0]["url"]
-    
-    await proses_msg.edit_text("👅 Mengunduh lagu...")
-    
-    download_url = f"https://api.botcahx.eu.org/api/download/spotify?url={track_url}&apikey=@moire_mor"
-    download_response = requests.get(download_url).json()
-    
-    if not download_response["status"]:
-        await proses_msg.edit_text("Gagal mengunduh lagu.")
-        return
-    
-    data = download_response["result"]["data"]
-    file_url = data["url"]
-    track_title = data["title"]
-    track_duration = data["duration"]
-    artist_name = data["artist"]["name"]
-    spotify_url = data["artist"]["external_urls"]["spotify"]
-    
-    user_id = message.from_user.id
-    audio_path = f"downloaded_audio_{user_id}.mp3"
-    
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-    }
-    
-    response = requests.get(file_url, headers=headers, stream=True)
-    if response.status_code != 200:
-        await proses_msg.edit_text("Gagal mengunduh lagu. Server menolak permintaan (403 Forbidden).")
-        return
-    
-    with open(audio_path, "wb") as file:
-        for chunk in response.iter_content(1024):
-            file.write(chunk)
-    
-    caption = (f"🎵 <b>{track_title}</b>\n"
-               f"👤 Artist: {artist_name}\n"
-               f"⏳ Durasi: {track_duration}\n"
-               f"🔗 <a href='{spotify_url}'>Dengarkan di Spotify</a>")
-    
-    await client.send_audio(
-        chat_id=message.chat.id,
-        audio=audio_path,
-        title=track_title,
-        caption=caption
-    )
-    
-    os.remove(audio_path)    
-    await proses_msg.delete()
+        return await message.reply("⚠️ Gunakan format: `.spotify <judul lagu>`")
+
+    status = await message.reply("🎶 Mencari lagu...")
+
+    # 1. Kirim perintah ke @Song_vkm_bot
+    await client.send_message(BOT_TARGET, f"/start {query}")
+
+    # 2. Tunggu balasan dengan tombol
+    try:
+        response = await client.listen(BOT_TARGET, timeout=15)
+    except asyncio.TimeoutError:
+        return await status.edit("❌ Bot tidak merespons. Coba lagi.")
+
+    if not response.reply_markup:
+        return await status.edit("❌ Tidak ada hasil ditemukan.")
+
+    # 3. Klik tombol pertama
+    try:
+        first_button = response.reply_markup.inline_keyboard[0][0]
+        await response.click(first_button.text)
+    except Exception as e:
+        return await status.edit(f"⚠️ Gagal klik tombol: {e}")
+
+    # 4. Tunggu musik dikirim
+    try:
+        song = await client.listen(BOT_TARGET, timeout=30)
+    except asyncio.TimeoutError:
+        return await status.edit("❌ Lagu tidak terkirim.")
+
+    if not song.audio:
+        return await status.edit("❌ Respon bukan audio.")
+
+    # 5. Forward musik ke chat user
+    await song.copy(message.chat.id, caption=f"🎵 Hasil pencarian: <b>{query}</b>")
+    await status.delete()
