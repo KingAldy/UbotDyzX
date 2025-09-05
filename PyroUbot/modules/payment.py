@@ -21,7 +21,7 @@ async def _(client, callback_query):
         pesan = await bot.ask(
             user_id,
             f"""
-<blockquote><b>SILAHKAN MELAKUKAN PEMBAYARAN KE NOMOR DANA OWNER</b>           
+<blockquote><b>SILAHKAN MELAKUKAN PEMBAYARAN</b>           
 
 DANA : ||https://files.catbox.moe/bj5sex.jpg||
 
@@ -54,7 +54,7 @@ DANA : ||https://files.catbox.moe/bj5sex.jpg||
             )
             CONFIRM_PAYMENT.remove(get.id)
             buttons = [
-                [InlineKeyboardButton("📞 ᴏᴡɴᴇʀ", url="https://t.me/xwynoez1")]
+                [InlineKeyboardButton("📞 ᴏᴡɴᴇʀ", url="https://t.me/AldyZzXy")]
             ]
             return await bot.send_message(
                 user_id,
